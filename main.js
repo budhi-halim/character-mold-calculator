@@ -95,7 +95,17 @@ function init() {
   });
 
   // 3. Attach Event Listeners
-  calculateBtn.addEventListener("click", performCalculation);
+  calculateBtn.addEventListener("click", async () => {
+    calculateBtn.textContent = "Processing...";
+    calculateBtn.disabled = true;
+
+    await new Promise(resolve => setTimeout(resolve, 20));
+
+    performCalculation();
+
+    calculateBtn.textContent = "Calculate";
+    calculateBtn.disabled = false;
+  });
   
   btnFirst.addEventListener("click", () => navigatePage(1));
   btnPrev.addEventListener("click", () => navigatePage(currentPage - 1));
